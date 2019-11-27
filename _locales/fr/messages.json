@@ -1,0 +1,74 @@
+{
+  "extensionName": {
+    "message": "Colenv",
+    "description": "Nom de l'extension."
+  },
+  "extensionDescription": {
+    "message": "Applique une couleur a l'UI en fonction de l'URL",
+    "description": "Description de l'extension."
+  },
+  "environmentTitle": {
+    "message": "Environnements",
+    "description": "Titre environnement sur la page d'option."
+  },
+  "buttonAddEnvironment": {
+    "message": "Ajouter un environment",
+    "description": "Button ajouter un environement."
+  },
+  "buttonAddUrl": {
+    "message": "Ajouter une url",
+    "description": "Button ajouter une url."
+  },
+  "urlsTitle": {
+    "message": "Urls",
+    "description": "Titre urls sur la page d'option."
+  },
+  "alertDeleteEnvironment": {
+    "message": "Voulez-vous supprimer l'environnement ?",
+    "description": "Alerte suppression environnement"
+  },
+  "defaultEnvironmentName": {
+    "message": "Nom de l'environnement",
+    "description": "Nom de l'environnement par défaut"
+  },
+  "testUrl": {
+    "message": "Testez une url",
+    "description": "Testez une url"
+  },
+  "labelUrlType": {
+    "message": "Regexp",
+    "description": "Regexp"
+  },
+  "labelUrlHost": {
+    "message": "Host",
+    "description": "Host"
+  },
+  "importExport": {
+    "message": "Import / Export",
+    "description": "Import export"
+  },
+  "interface": {
+    "message": "Interface",
+    "description": "Interface"
+  },
+  "interfaceToolbar": {
+    "message": "Toolbar",
+    "description": "Toolbar"
+  },
+  "interfaceFrame": {
+    "message": "Frame",
+    "description": "Frame"
+  },
+  "interfaceTabSelected": {
+    "message": "Tab selected",
+    "description": "Tab selected"
+  },
+  "interfaceToolbarField": {
+    "message": "Toolbar field",
+    "description": "Toolbar field"
+  },
+  "interfaceTabLine": {
+    "message": "Tab line",
+    "description": "Tab line"
+  }
+}

@@ -1,0 +1,114 @@
+<html>
+<head>
+    <meta charset="utf-8">
+    <link rel="stylesheet" type="text/css" href="options.css">
+</head>
+
+<body>
+
+<div class="container">
+    <h1 class="title i18n-extension-name"></h1>
+    <div class="columns">
+        <div class="column">
+            <div class="block">
+                <h2 class="i18n-test-url"></h2>
+                <input type="text" id="test_url" />
+            </div>
+        </div>
+    </div>
+    <div class="columns">
+        <div class="column environments-column">
+            <div class="block">
+                <h2 class="i18n-environment"></h2>
+                <div id="environments"></div>
+                <button class="button i18n-button-add-environment" id="add_environment"></button>
+            </div>
+        </div>
+        <div class="column">
+            <div class="block">
+                <h2 class="i18n-urls"></h2>
+                <div id="container_urls"></div>
+            </div>
+        </div>
+    </div>
+    <div class="columns">
+    <div class="column">
+        <div class="block">
+            <h2 class="i18n-import-export"></h2>
+
+        </div>
+    </div>
+    <div class="column interface-column">
+        <div class="block">
+            <h2 class="i18n-interface"></h2>
+            <label class="i18n-interface-toolbar interface-checkbox">
+                <input type="checkbox" id="interfaceToolbar">
+            </label>
+            <label class="i18n-interface-frame interface-checkbox">
+                <input type="checkbox" id="interfaceFrame">
+            </label>
+            <label class="i18n-interface-tab-selected interface-checkbox">
+                <input type="checkbox" id="interfaceTabSelected">
+            </label>
+            <label class="i18n-interface-toolbar-field interface-checkbox">
+                <input type="checkbox" id="interfaceToolbarField">
+            </label>
+            <label class="i18n-interface-tab-line interface-checkbox">
+                <input type="checkbox" id="interfaceTabLine">
+            </label>
+        </div>
+    </div>
+
+</div>
+</div>
+
+<template id="template_environment">
+    <div class="environment">
+        <div class="environment-move">
+            <img src="../../resources/images/icons-menu_24.png">
+        </div>
+        <div class="environment-name">
+            <input type="text" class="environment-name-input" />
+        </div>
+        <div class="environment-color">
+            <input type="color" />
+        </div>
+        <div class="environment-trash">
+            <img src="../../resources/images/icons-trash_24.png">
+        </div>
+    </div>
+</template>
+
+<template id="template_urls">
+    <div class="urls">
+        <div class="urls-list"></div>
+        <button class="button i18n-button-add-url"></button>
+    </div>
+</template>
+
+<template id="template_url">
+    <div class="url">
+        <div class="url-regexp">
+            <input type="text" class="url-name-input" />
+        </div>
+        <div class="url-checkbox">
+            <label class="i18n-label-url-type">
+                <input type="checkbox" />
+            </label>
+        </div>
+        <div class="url-checkbox">
+            <label class="i18n-label-url-host">
+                <input type="checkbox" />
+            </label>
+        </div>
+        <div class="url-trash">
+            <img src="../../resources/images/icons-trash_24.png">
+        </div>
+    </div>
+</template>
+
+<script src="options.js"></script>
+</body>
+
+</html>
+
