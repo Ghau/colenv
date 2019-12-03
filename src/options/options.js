@@ -7,6 +7,15 @@ document.getElementById('test_url').addEventListener('keyup', (e) => {
 document.getElementById('test_url').addEventListener('change', (e) => {
     testUrl(e.target.value);
 });
+document.getElementById('testInterface').addEventListener('click', () => {
+  testInterface(environmentManager.getColors(document.getElementById('testInterfaceColor').value));
+});
+document.getElementById('buttonImport').addEventListener('click', () => {
+  importEnvironments();
+});
+document.getElementById('buttonExport').addEventListener('click', () => {
+    exportEnvironments();
+});
 
 const EnvironmentManager = function () {
     this.environments = new Map();
@@ -125,9 +134,11 @@ const EnvironmentManager = function () {
 
         const div = urlTemplate.querySelectorAll('.url')[0];
 
+        const getUrlPlaceHolder = bool  => bool ?  '*.mozilla.org' : '.*\\.mozilla\\.org';
+
         let [inputUrl, inputType, inputHost] = div.querySelectorAll('input');
         inputUrl.value = regexp;
-        inputUrl.placeholder = simplified ? '*.mozilla.org' : '.*\\.mozilla\\.org';
+        inputUrl.placeholder = getUrlPlaceHolder(simplified);
 
         if (simplified) {
             inputType.checked = 'checked';
@@ -147,14 +158,14 @@ const EnvironmentManager = function () {
             this.save();
         });
         inputType.addEventListener('change', e => {
-            inputUrl.placeholder = simplified ? '*.mozilla.org' : '.*\\.mozilla\\.org';
+            inputUrl.placeholder = getUrlPlaceHolder(!e.target.checked);
             this.save();
         });
         inputHost.addEventListener('change', e => {
             this.save();
         });
         trashUrl.addEventListener('click', () => {
-            div.remove()
+            div.remove();
             this.environments.get(uid).environment.urls.delete(urlUid);
             this.save();
         });
@@ -183,18 +194,38 @@ const EnvironmentManager = function () {
         this.environments = tmpEnvironment;
     };
 
+    this.getColors = (color) => {
+      let colors = {tab_background_ext: '#000'};
+      if (document.getElementById('interfaceToolbar').checked) {
+        colors['toolbar'] = color;
+      }
+      if (document.getElementById('interfaceFrame').checked) {
+        colors['frame'] = color;
+      }
+      if (document.getElementById('interfaceTabSelected').checked) {
+        colors['tab_selected'] = color;
+      }
+      if (document.getElementById('interfaceToolbarField').checked) {
+        colors['toolbar_field'] = color;
+      }
+      if (document.getElementById('interfaceTabLine').checked) {
+        colors['tab_line'] = color;
+      }
+
+      return colors;
+    };
+
     this.save = () => {
         this.resetSort();
-        const toolbar = document.getElementById('interfaceToolbar').checked;
-        const frame = document.getElementById('interfaceFrame').checked;
-        const tabSelected = document.getElementById('interfaceTabSelected').checked;
-        const toolbarField = document.getElementById('interfaceToolbarField').checked;
-        const tabLine = document.getElementById('interfaceTabLine').checked;
+
         let environments = [];
         for (const [uid, {environment}] of this.environments) {
 
             let urls = [];
             for (const [urlUid, { inputUrl, inputType, inputHost }] of environment.urls) {
+                if (inputUrl.value === '') {
+                    continue;
+                }
                 urls.push({
                     regexp: inputUrl.value,
                     simplified: inputType.checked ? false : true,
@@ -202,38 +233,18 @@ const EnvironmentManager = function () {
                 });
             }
 
-            let colors = {};
-            if (toolbar) {
-                colors['toolbar'] = environment.inputColor.value;
-            }
-            if (frame) {
-                colors['frame'] = environment.inputColor.value;
-            }
-            if (tabSelected) {
-                colors['tab_selected'] = environment.inputColor.value;
-            }
-            if (toolbarField) {
-                colors['toolbar_field'] = environment.inputColor.value;
-            }
-            if (tabLine) {
-                colors['tab_line'] = environment.inputColor.value;
-            }
-
             environments.push({
                 name: environment.inputName.value,
                 color: environment.inputColor.value,
-                colors: {
-                    tab_background_ext: '#000',
-                    ...colors
-                },
+                colors: this.getColors(environment.inputColor.value),
                 urls
             });
         }
 
-        browser.storage.local.set({
+        browser.storage.sync.set({
             environments
         });
-console.log(environments);
+
         testUrl(document.getElementById('test_url').value);
     };
 
@@ -255,27 +266,41 @@ function uuidv4() {
 }
 
 function testUrl(url) {
-    browser.tabs.getCurrent().then(tab => {
-        browser.runtime.sendMessage({action: 'test_url', windowId: tab.windowId, url});
+  browser.tabs.getCurrent().then(tab => {
+    browser.runtime.sendMessage({action: 'test_url', windowId: tab.windowId, url});
     });
+}
+
+function testInterface(colors) {
+  browser.tabs.getCurrent().then(tab => {
+    browser.runtime.sendMessage({action: 'test_interface', windowId: tab.windowId, colors});
+  });
+}
+
+function exportEnvironments() {
+  browser.runtime.sendMessage({action: 'export_environments'});
+}
+
+function importEnvironments() {
+
 }
 
 const environmentManager = new EnvironmentManager();
 
-browser.storage.local.get('environments').then(({environments}) => environmentManager.load(environments));
+browser.storage.sync.get('environments').then(data => data && data.environments ? environmentManager.load(data.environments) : '');
 
 document.getElementById('interfaceToolbar').addEventListener('change', () => {
     environmentManager.save();
-})
+});
 document.getElementById('interfaceFrame').addEventListener('change', () => {
     environmentManager.save();
-})
+});
 document.getElementById('interfaceTabSelected').addEventListener('change', () => {
     environmentManager.save();
-})
+});
 document.getElementById('interfaceToolbarField').addEventListener('change', () => {
     environmentManager.save();
-})
+});
 document.getElementById('interfaceTabLine').addEventListener('change', () => {
     environmentManager.save();
-})
+});

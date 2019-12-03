@@ -4,29 +4,52 @@ browser.runtime.onMessage.addListener(async message => {
     }
 });
 
+browser.runtime.onMessage.addListener(async message => {
+  if (message.action === 'test_interface') {
+    setColor(message.windowId, message.colors);
+  }
+});
+
+browser.runtime.onMessage.addListener(async message => {
+  if (message.action === 'export_environments') {
+      console.log("ok");
+    const storage = await browser.storage.sync.get('environments');
+    console.log(storage);
+    const environements = storage && storage.environments ? storage.environments : '';
+    console.log(environements);
+    const blob = new Blob([environements]);
+    console.log(URL.createObjectURL(blob));
+    var downloading = browser.downloads.download({
+      url : URL.createObjectURL(blob),
+      filename : browser.i18n.getMessage('defaultExportFileName'),
+      conflictAction : 'uniquify'
+    });
+
+    downloading.then(id => console.log(id), error => console.log(error));
+  }
+});
+
 function setColor(windowId, colors) {
-    console.log(colors);
     if (colors) {
         browser.theme.update(windowId, {
             images: {
                 theme_frame: '',
             },
-            // colors: {
-            //     toolbar: color,
-            //     frame: color,
-            //     tab_background_ext: '#000',
-            // }
             colors: colors
         });
 
         return;
     }
 
-    // browser.theme.reset(windowId);
+    browser.theme.reset(windowId);
 }
 
 async function getColors(url) {
-    const { environments } = await browser.storage.local.get('environments');
+    const storage = await browser.storage.sync.get('environments');
+    if (!storage || !storage.environments) {
+      return;
+    }
+    const environments = storage.environments;
     for (let i in environments) {
         for (let j in environments[i].urls) {
             let regexp = environments[i].urls[j].simplified ? simplifyRegexp(environments[i].urls[j].regexp) : environments[i].urls[j].regexp;
@@ -43,7 +66,12 @@ function simplifyRegexp(regexp) {
 }
 
 function simplifyUrl(url) {
-    return new URL(url).hostname;
+    try {
+      return new URL(url).hostname;
+    } catch (e) {
+        return '';
+    }
+
 }
 browser.windows.onFocusChanged.addListener(windowId => {
     browser.tabs.query({active: true, windowId: windowId}, async tabs => {
@@ -60,5 +88,7 @@ browser.tabs.onUpdated.addListener(async (tabId, changeInfo, tab) => {
 });
 
 browser.tabs.onActivated.addListener(async activeInfo => {
-    browser.tabs.get(activeInfo.tabId).then(async tab => setColor(tab.windowId, await getColors(tab.url)));
+    if (activeInfo.tabId) {
+      browser.tabs.get(activeInfo.tabId).then(async tab => setColor(tab.windowId, await getColors(tab.url)));
+    }
 });

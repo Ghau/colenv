@@ -70,5 +70,21 @@
   "interfaceTabLine": {
     "message": "Tab line",
     "description": "Tab line"
+  },
+  "buttonTestInterface": {
+    "message": "Tester l'interface",
+    "description": "bouton tester interface"
+  },
+  "buttonImport": {
+    "message": "Import",
+    "description": "Bouton import"
+  },
+  "buttonExport": {
+    "message": "Export",
+    "description": "Bouton export"
+  },
+  "defaultExportFileName": {
+    "message": "export-colenv.json",
+    "description": "Nom de fichier par défaut pour l'export"
   }
 }

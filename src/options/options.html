@@ -1,6 +1,7 @@
 <html>
 <head>
     <meta charset="utf-8">
+    <script type="application/javascript" src="../../browser-polyfill.js"></script>
     <link rel="stylesheet" type="text/css" href="options.css">
 </head>
 
@@ -12,7 +13,7 @@
         <div class="column">
             <div class="block">
                 <h2 class="i18n-test-url"></h2>
-                <input type="text" id="test_url" />
+                <input type="text" id="test_url" value="http://" />
             </div>
         </div>
     </div>
@@ -32,34 +33,48 @@
         </div>
     </div>
     <div class="columns">
-    <div class="column">
-        <div class="block">
-            <h2 class="i18n-import-export"></h2>
+        <div class="column">
+            <div class="block">
+                <h2 class="i18n-import-export"></h2>
+                <button class="button i18n-button-import" id="buttonImport"></button>
+                <button class="button i18n-button-export" id="buttonExport"></button>
+            </div>
+        </div>
+        <div class="column interface-column">
+            <div class="block">
+                <h2 class="i18n-interface"></h2>
+                <div class="columns">
+                    <div class="column">
+                        <div class="interface-element">
+                            <label class="i18n-interface-toolbar interface-checkbox" for="interfaceToolbar"></label>
+                            <input type="checkbox" id="interfaceToolbar">
+                        </div>
+                        <div class="interface-element">
+                            <label class="i18n-interface-frame interface-checkbox" for="interfaceFrame"></label>
+                            <input type="checkbox" id="interfaceFrame">
+                        </div>
+                        <div class="interface-element">
+                            <label class="i18n-interface-tab-selected interface-checkbox" for="interfaceTabSelected"></label>
+                            <input type="checkbox" id="interfaceTabSelected">
+                        </div>
+                        <div class="interface-element">
+                            <label class="i18n-interface-toolbar-field interface-checkbox" for="interfaceToolbarField"></label>
+                            <input type="checkbox" id="interfaceToolbarField">
+                        </div>
+                        <div class="interface-element">
+                            <label class="i18n-interface-tab-line interface-checkbox" for="interfaceTabLine"></label>
+                            <input type="checkbox" id="interfaceTabLine">
+                        </div>
+                    </div>
+                    <div class="column test-interface">
+                        <button class="button i18n-button-test-interface" id="testInterface"></button>
+                        <input type="color" id="testInterfaceColor" value="#70FFF8" />
+                    </div>
+                </div>
 
+            </div>
         </div>
     </div>
-    <div class="column interface-column">
-        <div class="block">
-            <h2 class="i18n-interface"></h2>
-            <label class="i18n-interface-toolbar interface-checkbox">
-                <input type="checkbox" id="interfaceToolbar">
-            </label>
-            <label class="i18n-interface-frame interface-checkbox">
-                <input type="checkbox" id="interfaceFrame">
-            </label>
-            <label class="i18n-interface-tab-selected interface-checkbox">
-                <input type="checkbox" id="interfaceTabSelected">
-            </label>
-            <label class="i18n-interface-toolbar-field interface-checkbox">
-                <input type="checkbox" id="interfaceToolbarField">
-            </label>
-            <label class="i18n-interface-tab-line interface-checkbox">
-                <input type="checkbox" id="interfaceTabLine">
-            </label>
-        </div>
-    </div>
-
-</div>
 </div>
 
 <template id="template_environment">
@@ -107,7 +122,7 @@
     </div>
 </template>
 
-<script src="options.js"></script>
+<script type="application/javascript" src="options.js"></script>
 </body>
 
 </html>
