@@ -9,10 +9,6 @@ h2 {
 label {
     font-size: 12px;
 }
-input[type="color"] {
-    -moz-appearance: none;
-    border: none;
-}
 .title {
     text-align: center;
 }
@@ -31,9 +27,6 @@ input[type="color"] {
     padding-left: 10px;
     padding-right: 10px;
 }
-.environments-column {
-    max-width: 450px;
-}
 .interface-column {
     max-width: 450px;
 }
@@ -42,165 +35,9 @@ input[type="color"] {
     background-color: #fff;
     padding: 20px;
 }
-.button:hover {
-    background: #d1eaed;
-}
-.button:active {
-    background: #6495ed;;
-    color: #fff;
-}
-.button {
-    width: 100%;
-    margin-top: 7px;
-    background: #fff;
-    border: .05rem dashed;
-    cursor: pointer;
-    color: #6495ed;
-    padding: 8px 8px;
-    text-align: center;
-    text-decoration: none;
-    transition: background .2s,border .2s,box-shadow .2s,color .2s;
-    user-select: none;
-    border-radius: .1px;
-    outline: none;
-}
-.button:focus {
-    outline:none;
-}
-.button::-moz-focus-inner {
-    border-style: none;
-    padding: 0;
-}
-.environment {
-    display: flex;
-    position: relative;
-    box-shadow: 0px 0px 2px 1px gray;
-    padding: 10px 10px;
-    margin-bottom: 8px;
-    background: #fff;
-    user-select: none;
-}
-.environment-move {
-    margin-right: 10px;
-    cursor: grab;
-}
-
-.environment-trash {
-    cursor:pointer;
-    text-align: right;
-}
-
-.environment-name {
-    padding-top: 3px;
-    width: 100%;
-    cursor: pointer;
-}
-.environment-name-edit {
-    cursor: pointer;
-}
-.environment-name-coche {
-    display: none;
-    cursor: pointer;
-}
-.environment-name-input {
-    margin-top: -5px;
-}
-.url {
-    display: flex;
-    position: relative;
-    box-shadow: 0px 0px 2px 1px gray;
-    padding: 10px 10px;
-    margin-bottom: 8px;
-    background: #fff;
-    user-select: none;
-    align-items: center;
-}
-.url-name-input {
-    width: 500px;
-}
-.url-checkbox label {
-    display: flex;
-    margin-top: 8px;
-    padding-left: 5px;
-    height: 20px;
-}
-.url-checkbox label input {
-    margin-top: 0px;
-}
-.url-trash {
-    cursor:pointer;
-    text-align: right;
-}
-.test_url {
-    width: 100%;
-}
-.interface-element {
-    display: flex;
-    width: 200px;
-}
-.interface-element > input, label {
-    flex: 1;
-}
 .test-interface {
     text-align: center;
 }
 #testInterfaceColor {
     margin-top: 20px;
-}
-
-
-
-.i18n-extension-name:before {
-    content: "__MSG_extensionName__";
-}
-.i18n-test-url:before {
-    content: "__MSG_testUrl__";
-}
-.i18n-environment:before {
-    content: "__MSG_environmentTitle__";
-}
-.i18n-button-add-environment:before {
-    content: "__MSG_buttonAddEnvironment__";
-}
-.i18n-button-add-url:before {
-    content: "__MSG_buttonAddUrl__";
-}
-.i18n-urls:before {
-    content: "__MSG_urlsTitle__";
-}
-.i18n-label-url-type:before {
-    content: "__MSG_labelUrlType__";
-}
-.i18n-label-url-host:before {
-    content: "__MSG_labelUrlHost__";
-}
-.i18n-import-export:before {
-    content: "__MSG_importExport__";
-}
-.i18n-interface:before {
-    content: "__MSG_interface__";
-}
-.i18n-interface-toolbar:before {
-    content: "__MSG_interfaceToolbar__";
-}
-.i18n-interface-frame:before {
-    content: "__MSG_interfaceFrame__";
-}
-.i18n-interface-tab-selected:before {
-    content: "__MSG_interfaceTabSelected__";
-}
-.i18n-interface-toolbar-field:before {
-    content: "__MSG_interfaceToolbarField__";
-}
-.i18n-interface-tab-line:before {
-    content: "__MSG_interfaceTabLine__";
-}
-.i18n-button-test-interface:before {
-    content: "__MSG_buttonTestInterface__";
-}
-.i18n-button-import:before {
-    content: "__MSG_buttonImport__";
-}
-.i18n-button-export:before {
-    content: "__MSG_buttonExport__";
 }

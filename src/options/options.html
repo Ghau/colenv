@@ -2,125 +2,77 @@
 <head>
     <meta charset="utf-8">
     <script type="application/javascript" src="../../browser-polyfill.js"></script>
+    <link rel="stylesheet" type="text/css" href="common.css">
     <link rel="stylesheet" type="text/css" href="options.css">
+    <script type="application/javascript" src="trans.js"></script>
+    <script type="application/javascript" src="environmentsTag/environment.js"></script>
+    <script type="application/javascript" src="interfaceTag/interface.js"></script>
 </head>
 
 <body>
 
 <div class="container">
-    <h1 class="title i18n-extension-name"></h1>
+    <h1 class="title"><trans-nav>extensionName</trans-nav></h1>
     <div class="columns">
         <div class="column">
             <div class="block">
-                <h2 class="i18n-test-url"></h2>
+                <h2><trans-nav>testUrl</trans-nav></h2>
                 <input type="text" id="test_url" value="http://" />
             </div>
         </div>
     </div>
     <div class="columns">
-        <div class="column environments-column">
-            <div class="block">
-                <h2 class="i18n-environment"></h2>
-                <div id="environments"></div>
-                <button class="button i18n-button-add-environment" id="add_environment"></button>
-            </div>
-        </div>
         <div class="column">
             <div class="block">
-                <h2 class="i18n-urls"></h2>
-                <div id="container_urls"></div>
+                <h2><trans-nav><i>environmentTitle</i></trans-nav></h2>
+                <environments-container id="environments"></environments-container>
             </div>
         </div>
     </div>
     <div class="columns">
         <div class="column">
             <div class="block">
-                <h2 class="i18n-import-export"></h2>
-                <button class="button i18n-button-import" id="buttonImport"></button>
-                <button class="button i18n-button-export" id="buttonExport"></button>
+                <h2><trans-nav>importExport</trans-nav></h2>
+                <button id="buttonImport"><trans-nav>buttonImport</trans-nav></button>
+                <button id="buttonExport"><trans-nav>buttonExport</trans-nav></button>
             </div>
         </div>
         <div class="column interface-column">
             <div class="block">
-                <h2 class="i18n-interface"></h2>
+                <h2><trans-nav>interface</trans-nav></h2>
                 <div class="columns">
                     <div class="column">
-                        <div class="interface-element">
-                            <label class="i18n-interface-toolbar interface-checkbox" for="interfaceToolbar"></label>
-                            <input type="checkbox" id="interfaceToolbar">
-                        </div>
-                        <div class="interface-element">
-                            <label class="i18n-interface-frame interface-checkbox" for="interfaceFrame"></label>
-                            <input type="checkbox" id="interfaceFrame">
-                        </div>
-                        <div class="interface-element">
-                            <label class="i18n-interface-tab-selected interface-checkbox" for="interfaceTabSelected"></label>
-                            <input type="checkbox" id="interfaceTabSelected">
-                        </div>
-                        <div class="interface-element">
-                            <label class="i18n-interface-toolbar-field interface-checkbox" for="interfaceToolbarField"></label>
-                            <input type="checkbox" id="interfaceToolbarField">
-                        </div>
-                        <div class="interface-element">
-                            <label class="i18n-interface-tab-line interface-checkbox" for="interfaceTabLine"></label>
-                            <input type="checkbox" id="interfaceTabLine">
-                        </div>
+                        <interface-block id="interface"></interface-block>
+<!--                        <div class="interface-element">-->
+<!--                            <label for="interfaceToolbar"><trans-nav>interfaceToolbar</trans-nav></label>-->
+<!--                            <input type="checkbox" id="interfaceToolbar">-->
+<!--                        </div>-->
+<!--                        <div class="interface-element">-->
+<!--                            <label for="interfaceFrame"><trans-nav>interfaceFrame</trans-nav></label>-->
+<!--                            <input type="checkbox" id="interfaceFrame">-->
+<!--                        </div>-->
+<!--                        <div class="interface-element">-->
+<!--                            <label for="interfaceTabSelected"><trans-nav>interfaceTabSelected</trans-nav></label>-->
+<!--                            <input type="checkbox" id="interfaceTabSelected">-->
+<!--                        </div>-->
+<!--                        <div class="interface-element">-->
+<!--                            <label for="interfaceToolbarField"><trans-nav>interfaceToolbarField</trans-nav></label>-->
+<!--                            <input type="checkbox" id="interfaceToolbarField">-->
+<!--                        </div>-->
+<!--                        <div class="interface-element">-->
+<!--                            <label for="interfaceTabLine"><trans-nav>interfaceTabLine</trans-nav></label>-->
+<!--                            <input type="checkbox" id="interfaceTabLine">-->
+<!--                        </div>-->
                     </div>
                     <div class="column test-interface">
-                        <button class="button i18n-button-test-interface" id="testInterface"></button>
+                        <button id="testInterface"><trans-nav>buttonTestInterface</trans-nav></button>
                         <input type="color" id="testInterfaceColor" value="#70FFF8" />
                     </div>
                 </div>
-
             </div>
         </div>
     </div>
 </div>
-
-<template id="template_environment">
-    <div class="environment">
-        <div class="environment-move">
-            <img src="../../resources/images/icons-menu_24.png">
-        </div>
-        <div class="environment-name">
-            <input type="text" class="environment-name-input" />
-        </div>
-        <div class="environment-color">
-            <input type="color" />
-        </div>
-        <div class="environment-trash">
-            <img src="../../resources/images/icons-trash_24.png">
-        </div>
-    </div>
-</template>
-
-<template id="template_urls">
-    <div class="urls">
-        <div class="urls-list"></div>
-        <button class="button i18n-button-add-url"></button>
-    </div>
-</template>
-
-<template id="template_url">
-    <div class="url">
-        <div class="url-regexp">
-            <input type="text" class="url-name-input" />
-        </div>
-        <div class="url-checkbox">
-            <label class="i18n-label-url-type">
-                <input type="checkbox" />
-            </label>
-        </div>
-        <div class="url-checkbox">
-            <label class="i18n-label-url-host">
-                <input type="checkbox" />
-            </label>
-        </div>
-        <div class="url-trash">
-            <img src="../../resources/images/icons-trash_24.png">
-        </div>
-    </div>
-</template>
 
 <script type="application/javascript" src="options.js"></script>
 </body>
