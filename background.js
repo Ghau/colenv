@@ -12,20 +12,28 @@ browser.runtime.onMessage.addListener(async message => {
 
 browser.runtime.onMessage.addListener(async message => {
   if (message.action === 'export_environments') {
-      console.log("ok");
     const storage = await browser.storage.sync.get('environments');
-    console.log(storage);
     const environements = storage && storage.environments ? storage.environments : '';
-    console.log(environements);
-    const blob = new Blob([environements]);
-    console.log(URL.createObjectURL(blob));
-    var downloading = browser.downloads.download({
-      url : URL.createObjectURL(blob),
-      filename : browser.i18n.getMessage('defaultExportFileName'),
-      conflictAction : 'uniquify'
+
+    const urlFile = URL.createObjectURL(new Blob([JSON.stringify(environements)]));
+    const downloading = browser.downloads.download({
+      url: urlFile,
+      filename: browser.i18n.getMessage('defaultExportFileName'),
+      conflictAction: 'uniquify',
+      saveAs: true
     });
 
-    downloading.then(id => console.log(id), error => console.log(error));
+    browser.downloads.onChanged.addListener(downloadItem => {
+        if (downloadItem.state.current === 'complete') {
+          URL.revokeObjectURL(urlFile);
+        }
+    });
+  }
+});
+
+browser.runtime.onMessage.addListener(async message => {
+  if (message.action === 'import_environments') {
+
   }
 });
 

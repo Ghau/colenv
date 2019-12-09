@@ -11,14 +11,16 @@
   },
   "options_ui": {
     "page": "src/options/options.html",
-    "open_in_tab": true
+    "open_in_tab": true,
+    "browser_style": true
   },
   "default_locale": "en",
   "permissions": [
     "storage",
     "tabs",
     "activeTab",
-    "theme"
+    "theme",
+    "downloads"
   ],
   "applications": {
     "gecko": {
