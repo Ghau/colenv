@@ -19,10 +19,6 @@
     "message": "Ajouter une url",
     "description": "Button ajouter une url."
   },
-  "urlsTitle": {
-    "message": "Urls",
-    "description": "Titre urls sur la page d'option."
-  },
   "alertDeleteEnvironment": {
     "message": "Voulez-vous supprimer l'environnement ?",
     "description": "Alerte suppression environnement"
@@ -86,5 +82,9 @@
   "defaultExportFileName": {
     "message": "export-colenv.json",
     "description": "Nom de fichier par défaut pour l'export"
+  },
+  "importUrl": {
+    "message": "Import depuis une url",
+    "description": "Import depuis une url"
   }
 }

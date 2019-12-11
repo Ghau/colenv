@@ -19,10 +19,6 @@
     "message": "Add an url",
     "description": "Button add url on option page."
   },
-  "urlsTitle": {
-    "message": "Urls",
-    "description": "Urls title on option page."
-  },
   "alertDeleteEnvironment": {
     "message": "Do you want to delete the environment ?",
     "description": "Environment delete alert"
@@ -86,5 +82,9 @@
   "defaultExportFileName": {
     "message": "export-colenv.json",
     "description": "Default export filename"
+  },
+  "importUrl": {
+    "message": "Import form url",
+    "description": "Import form url"
   }
 }

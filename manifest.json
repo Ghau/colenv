@@ -20,7 +20,8 @@
     "tabs",
     "activeTab",
     "theme",
-    "downloads"
+    "downloads",
+    "<all_urls>"
   ],
   "applications": {
     "gecko": {
