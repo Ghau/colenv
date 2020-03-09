@@ -86,5 +86,13 @@
   "importUrl": {
     "message": "Import depuis une url",
     "description": "Import depuis une url"
+  },
+  "interfaceTopBanner": {
+    "message": "Bannière haute",
+    "description": "Bannière haute interface"
+  },
+  "SubTitleBrowserUI": {
+    "message": "Browser UI",
+    "description": "Browser UI subtitle"
   }
 }

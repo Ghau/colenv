@@ -2,6 +2,7 @@ let interfaceTemplate = document.createElement('template');
 interfaceTemplate.innerHTML = `
     <link rel="stylesheet" href="common.css">
     <link rel="stylesheet" href="interfaceTag/interface.css">
+    <h3>Browser UI</h3>
     <div class="interface-element">
         <label for="interfaceToolbar"><trans-nav>interfaceToolbar</trans-nav></label>
         <input type="checkbox" id="interfaceToolbar">
@@ -21,6 +22,11 @@ interfaceTemplate.innerHTML = `
     <div class="interface-element">
         <label for="interfaceTabLine"><trans-nav>interfaceTabLine</trans-nav></label>
         <input type="checkbox" id="interfaceTabLine">
+    </div>
+    <h3>Page integration</h3>
+    <div class="interface-element">
+        <label for="interfaceTopBanner"><trans-nav>interfaceTopBanner</trans-nav></label>
+        <input type="checkbox" id="interfaceTopBanner">
     </div>
 `;
 
@@ -64,12 +70,21 @@ customElements.define('interface-block', class extends HTMLElement {
             value = JSON.parse(value);
         }
 
-        let [interfaceToolbar, interfaceFrame, interfaceTabSelected, interfaceToolbarField, interfaceTabLine] = this.shadowRoot.querySelectorAll('input');
-        interfaceToolbar.checked = value.toolbar !== undefined && value.toolbar? true : false;
-        interfaceFrame.checked = value.frame !== undefined && value.frame? true : false;
-        interfaceTabSelected.checked = value.tab_selected !== undefined && value.tab_selected? true : false;
-        interfaceToolbarField.checked = value.toolbar_field !== undefined && value.toolbar_field? true : false;
-        interfaceTabLine.checked = value.tab_line !== undefined && value.tab_line? true : false;
+        let [
+            interfaceToolbar,
+            interfaceFrame,
+            interfaceTabSelected,
+            interfaceToolbarField,
+            interfaceTabLine,
+            interfaceTopBanner
+        ] = this.shadowRoot.querySelectorAll('input');
+
+        interfaceToolbar.checked = value.toolbar !== undefined;
+        interfaceFrame.checked = value.frame !== undefined;
+        interfaceTabSelected.checked = value.tab_selected !== undefined;
+        interfaceToolbarField.checked = value.toolbar_field !== undefined;
+        interfaceTabLine.checked = value.tab_line !== undefined;
+        interfaceTopBanner.checked = value.top_banner !== undefined ;
     }
 
     change() {

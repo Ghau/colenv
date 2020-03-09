@@ -86,5 +86,13 @@
   "importUrl": {
     "message": "Import form url",
     "description": "Import form url"
+  },
+  "interfaceTopBanner": {
+    "message": "Top Banner",
+    "description": "Top banner interface"
+  },
+  "SubTitleBrowserUI": {
+    "message": "Browser UI",
+    "description": "Browser UI subtitle"
   }
 }
