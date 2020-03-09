@@ -1,13 +1,13 @@
 {
   "manifest_version": 2,
   "name": "colenv",
-  "version": "0.1",
+  "version": "0.2",
   "description": "__MSG_extensionDescription__",
   "icons": {
-    "48": "resources/images/icon_48.png"
+    "32": "resources/images/icon_32.png"
   },
   "background": {
-    "scripts": ["browser-polyfill.js", "background.js"]
+    "scripts": ["background.js"]
   },
   "options_ui": {
     "page": "src/options/options.html",

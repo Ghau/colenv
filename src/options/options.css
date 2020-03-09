@@ -44,3 +44,6 @@ label {
 .import-column {
     width: 660px;
 }
+.displayNone {
+    display: none;
+}

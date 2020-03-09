@@ -42,88 +42,85 @@ importTemplate.innerHTML = `
 `;
 
 customElements.define('import-url', class extends HTMLElement {
-    content = null;
-    validity = () => true;
-    constructor() {
-        super();
+  constructor() {
+    super();
 
-        this.attachShadow({mode: 'open'}).appendChild(importTemplate.content.cloneNode(true));
+    this.content = null;
+    this.validity = () => true;
+
+    this.attachShadow({mode: 'open'}).appendChild(importTemplate.content.cloneNode(true));
+  }
+
+  connectedCallback() {
+    const [verify, refresh] = this.shadowRoot.querySelectorAll('div');
+    const [input] = this.shadowRoot.querySelectorAll('input');
+    refresh.addEventListener('click', () => this.change());
+
+    input.addEventListener('keyup', () => this.change());
+    input.addEventListener('blur', () => this.change());
+
+    if (this.getAttribute('validity') && typeof this.getAttribute('validity') === 'function') {
+      this.validity = this.getAttribute('validity');
     }
 
-    connectedCallback() {
-        const [verify, refresh] = this.shadowRoot.querySelectorAll('div');
-        const [input] = this.shadowRoot.querySelectorAll('input');
-        refresh.addEventListener('click', () => this.change());
+    if (this.getAttribute('value')) {
+      this.load(this.getAttribute('value'));
+    }
+  }
 
-        input.addEventListener('keyup', () => this.change());
-        input.addEventListener('blur', () => this.change());
+  load(value) {
+    const [input] = this.shadowRoot.querySelectorAll('input');
+    input.value = value;
 
-        if (this.getAttribute('validity') && typeof this.getAttribute('validity') === 'function') {
-            this.validity = this.getAttribute('validity');
-        }
+    this.change();
+  }
 
-        if (this.getAttribute('value')) {
-            this.load(this.getAttribute('value'));
-        }
+  async get(url) {
+    try {
+      return await fetch(url).then(reponse => reponse.blob()).then(response => response.text());
+    } catch (e) {
+      return null;
     }
 
-    load(value) {
-        const [input] = this.shadowRoot.querySelectorAll('input');
-        input.value = value;
+  }
 
-        this.change();
+  async change() {
+    const [input] = this.shadowRoot.querySelectorAll('input');
+    if (input.value === '') {
+      this.content = null;
+      input.setCustomValidity('');
+      this.dispatchEvent(new CustomEvent('valid', {detail: {value: '', content: null}}));
+
+      return;
     }
 
-    async get(url) {
-        try {
-            return await fetch(url).then(reponse => reponse.blob()).then(response => response.text());
-        } catch (e) {
-            return null;
-        }
-
+    const content = await this.get(input.value);
+    if (content === this.content) {
+      return;
     }
 
-    async change() {
-        const [input] = this.shadowRoot.querySelectorAll('input');
-        if (input.value === '') {
-            this.content = null;
-            input.setCustomValidity('');
-            this.dispatchEvent(new CustomEvent('valid', { detail: {value: '', content: null}}));
-
-            return;
-        }
-
-        const content = await this.get(input.value);
-        if (content === this.content) {
-            return;
-        }
-
-        if (content && this.validity(content)) {
-            this.content = content;
-            this.dispatchEvent(new CustomEvent('valid', { detail: {value: input.value, content}}));
-            input.setCustomValidity('');
-        } else {
-            this.content = null;
-            input.setCustomValidity('test');
-        }
+    if (content && this.validity(content)) {
+      this.content = content;
+      this.dispatchEvent(new CustomEvent('valid', {detail: {value: input.value, content}}));
+      input.setCustomValidity('');
+    } else {
+      this.content = null;
+      input.setCustomValidity('test');
     }
+  }
 
-    set validity(validity) {
-        if (typeof validity === 'function') {
-            this.validity = validity
-        }
+  set validity(validity) {
+    if (typeof validity !== 'function') {
+      return false;
     }
+  }
 
-    get content() {
-        return this.content;
-    }
+  get value() {
+    const [input] = this.shadowRoot.querySelectorAll('input');
+    return input.value;
+  }
 
-    get value() {
-        const [input] = this.shadowRoot.querySelectorAll('input');
-        return input.value;
-    }
-
-    set value(value) {
-        this.load(value);
-    }
+  set value(value) {
+    this.load(value);
+  }
 });
