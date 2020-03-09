@@ -1,4 +1,6 @@
+themeSupported = browser.theme ? true : false;
 browser.runtime.onMessage.addListener(async message => {
+    console.log(message)
     if (message.action === 'test_url') {
         setColor(message.windowId, await getColors(message.url));
     }
@@ -6,7 +8,7 @@ browser.runtime.onMessage.addListener(async message => {
 
 browser.runtime.onMessage.addListener(async message => {
   if (message.action === 'test_interface') {
-    setColor(message.windowId, message.colors);
+    setColor(message.windowId, message);
   }
 });
 
@@ -37,13 +39,13 @@ browser.runtime.onMessage.addListener(async message => {
   }
 });
 
-function setColor(windowId, colors) {
-    if (colors) {
+function setColor(windowId, environment) {
+    if (environment && environment.colors) {
         browser.theme.update(windowId, {
             images: {
                 theme_frame: '',
             },
-            colors: colors
+            colors: environment.colors
         });
 
         return;
@@ -63,7 +65,7 @@ async function getColors(url) {
             let regexp = environments[i].urls[j].simplified ? simplifyRegexp(environments[i].urls[j].regexp) : environments[i].urls[j].regexp;
             let urlTest = environments[i].urls[j].hostOnly ? simplifyUrl(url) : url;
             if (new RegExp(regexp).test(urlTest)) {
-                return environments[i].colors;
+                return environments[i];
             }
         }
     }
@@ -81,22 +83,37 @@ function simplifyUrl(url) {
     }
 
 }
-browser.windows.onFocusChanged.addListener(windowId => {
-    browser.tabs.query({active: true, windowId: windowId}, async tabs => {
-        if (tabs.length) {
+browser.windows.onFocusChanged.addListener(async windowId => {
+    const tabs = await browser.tabs.query({active: true, windowId: windowId});
+    if (tabs.length) {
+        if (themeSupported) {
             setColor(windowId, await getColors(tabs[0].url));
         }
-    });
+    }
 });
 
 browser.tabs.onUpdated.addListener(async (tabId, changeInfo, tab) => {
     if (tab.active && changeInfo && changeInfo.url) {
-        setColor(tab.windowId, await getColors(tab.url));
+        if (themeSupported) {
+            setColor(tab.windowId, await getColors(tab.url).colors);
+        }
     }
 });
 
 browser.tabs.onActivated.addListener(async activeInfo => {
     if (activeInfo.tabId) {
-      browser.tabs.get(activeInfo.tabId).then(async tab => setColor(tab.windowId, await getColors(tab.url)));
+      browser.tabs.get(activeInfo.tabId).then(async tab => {
+          if (themeSupported) {
+              setColor(tab.windowId, await getColors(tab.url).colors);
+          }
+      });
     }
+});
+
+browser.runtime.onConnect.addListener(async port => {
+    const environment = await getColors(port.sender.url)
+    if (environment && environment.banner) {
+        port.postMessage({name: environment.name, banner: environment.banner});
+    }
+
 });

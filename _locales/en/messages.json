@@ -87,12 +87,24 @@
     "message": "Import form url",
     "description": "Import form url"
   },
+  "SubTitleBrowserUI": {
+    "message": "Browser UI",
+    "description": "Browser UI subtitle"
+  },
   "interfaceTopBanner": {
     "message": "Top Banner",
     "description": "Top banner interface"
   },
-  "SubTitleBrowserUI": {
-    "message": "Browser UI",
-    "description": "Browser UI subtitle"
+  "interfaceBottomBanner": {
+    "message": "Bottom Banner",
+    "description": "Bottom banner interface"
+  },
+  "interfaceRightBanner": {
+    "message": "Right Banner",
+    "description": "Right banner interface"
+  },
+  "interfaceLeftBanner": {
+    "message": "Left Banner",
+    "description": "Left banner interface"
   }
 }

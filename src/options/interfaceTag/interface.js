@@ -28,6 +28,18 @@ interfaceTemplate.innerHTML = `
         <label for="interfaceTopBanner"><trans-nav>interfaceTopBanner</trans-nav></label>
         <input type="checkbox" id="interfaceTopBanner">
     </div>
+    <div class="interface-element">
+        <label for="interfaceBottomBanner"><trans-nav>interfaceBottomBanner</trans-nav></label>
+        <input type="checkbox" id="interfaceBottomBanner">
+    </div>
+    <div class="interface-element">
+        <label for="interfaceRightBanner"><trans-nav>interfaceRightBanner</trans-nav></label>
+        <input type="checkbox" id="interfaceRightBanner">
+    </div>
+    <div class="interface-element">
+        <label for="interfaceLeftBanner"><trans-nav>interfaceLeftBanner</trans-nav></label>
+        <input type="checkbox" id="interfaceTopBanner">
+    </div>
 `;
 
 customElements.define('interface-block', class extends HTMLElement {
@@ -40,13 +52,9 @@ customElements.define('interface-block', class extends HTMLElement {
     }
 
     connectedCallback() {
-        let [interfaceToolbar, interfaceFrame, interfaceTabSelected, interfaceToolbarField, interfaceTabLine] = this.shadowRoot.querySelectorAll('input');
-
-        interfaceToolbar.addEventListener('change', () => this.change());
-        interfaceFrame.addEventListener('change', () => this.change());
-        interfaceTabSelected.addEventListener('change', () => this.change());
-        interfaceToolbarField.addEventListener('change', () => this.change());
-        interfaceTabLine.addEventListener('change', () => this.change());
+        for (let input of this.shadowRoot.querySelectorAll('input')) {
+            input.addEventListener('change', () => this.change());
+        }
 
         if (this.getAttribute('value')) {
             this.load(this.getAttribute('value'));
@@ -76,15 +84,21 @@ customElements.define('interface-block', class extends HTMLElement {
             interfaceTabSelected,
             interfaceToolbarField,
             interfaceTabLine,
-            interfaceTopBanner
+            interfaceTopBanner,
+            interfaceBottomBanner,
+            interfaceRightBanner,
+            interfaceLeftBanner,
         ] = this.shadowRoot.querySelectorAll('input');
 
-        interfaceToolbar.checked = value.toolbar !== undefined;
-        interfaceFrame.checked = value.frame !== undefined;
-        interfaceTabSelected.checked = value.tab_selected !== undefined;
-        interfaceToolbarField.checked = value.toolbar_field !== undefined;
-        interfaceTabLine.checked = value.tab_line !== undefined;
-        interfaceTopBanner.checked = value.top_banner !== undefined ;
+        interfaceToolbar.checked = value.colors.toolbar !== undefined;
+        interfaceFrame.checked = value.colors.frame !== undefined;
+        interfaceTabSelected.checked = value.colors.tab_selected !== undefined;
+        interfaceToolbarField.checked = value.colors.toolbar_field !== undefined;
+        interfaceTabLine.checked = value.colors.tab_line !== undefined;
+        interfaceTopBanner.checked = value.banner.top !== undefined ;
+        interfaceBottomBanner.checked = value.banner.bottom !== undefined ;
+        interfaceRightBanner.checked = value.banner.right !== undefined ;
+        interfaceLeftBanner.checked = value.banner.left !== undefined ;
     }
 
     change() {
@@ -92,14 +106,32 @@ customElements.define('interface-block', class extends HTMLElement {
     }
 
     get value() {
-        const [interfaceToolbar, interfaceFrame, interfaceTabSelected, interfaceToolbarField, interfaceTabLine] = this.shadowRoot.querySelectorAll('input');
+        const [
+            interfaceToolbar,
+            interfaceFrame,
+            interfaceTabSelected,
+            interfaceToolbarField,
+            interfaceTabLine,
+            interfaceTopBanner,
+            interfaceBottomBanner,
+            interfaceRightBanner,
+            interfaceLeftBanner,
+        ] = this.shadowRoot.querySelectorAll('input');
 
         return {
-            toolbar: interfaceToolbar.checked,
-            frame: interfaceFrame.checked,
-            tab_selected: interfaceTabSelected.checked,
-            toolbar_field: interfaceToolbarField.checked,
-            tab_line: interfaceTabLine.checked
+            colors: {
+                toolbar: interfaceToolbar.checked,
+                frame: interfaceFrame.checked,
+                tab_selected: interfaceTabSelected.checked,
+                toolbar_field: interfaceToolbarField.checked,
+                tab_line: interfaceTabLine.checked
+            },
+            banner: {
+                top: interfaceTopBanner.checked,
+                bottom: interfaceBottomBanner.checked,
+                right: interfaceRightBanner.checked,
+                left: interfaceLeftBanner.checked
+            }
         }
     }
 

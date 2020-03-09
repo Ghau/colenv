@@ -73,7 +73,7 @@ customElements.define('upload-form', class extends HTMLElement {
             e.preventDefault();
             if (e.dataTransfer.items) {
                 if (e.dataTransfer.items[0].kind === 'file') {
-                    if (this.accept && this.accept.inclides(e.dataTransfer.items[0].type)) {
+                    if (this.accept && this.accept.includes(e.dataTransfer.items[0].type)) {
                         e.dataTransfer.items[0].getAsFile().text().then(t => this.uploaded(t));
                     }
                 } else if (e.dataTransfer.items[0].kind === 'string') {

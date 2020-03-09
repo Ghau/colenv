@@ -87,12 +87,24 @@
     "message": "Import depuis une url",
     "description": "Import depuis une url"
   },
+  "SubTitleBrowserUI": {
+    "message": "Browser UI",
+    "description": "Browser UI subtitle"
+  },
   "interfaceTopBanner": {
     "message": "Bannière haute",
     "description": "Bannière haute interface"
   },
-  "SubTitleBrowserUI": {
-    "message": "Browser UI",
-    "description": "Browser UI subtitle"
+  "interfaceBottomBanner": {
+    "message": "Bannière basse",
+    "description": "Bannière basse interface"
+  },
+  "interfaceRightBanner": {
+    "message": "Bannière droite",
+    "description": "Bannière droite interface"
+  },
+  "interfaceLeftBanner": {
+    "message": "Bannière gauche",
+    "description": "Bannière gauche interface"
   }
 }

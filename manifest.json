@@ -9,6 +9,12 @@
   "background": {
     "scripts": ["browser-polyfill.js", "background.js"]
   },
+  "content_scripts": [
+    {
+      "matches": ["<all_urls>"],
+      "js": ["banner.js"]
+    }
+  ],
   "options_ui": {
     "page": "src/options/options.html",
     "open_in_tab": true,

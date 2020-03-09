@@ -56,7 +56,7 @@ document.getElementById('interface').addEventListener('change', () => {
   save();
 });
 document.getElementById('testInterface').addEventListener('click', () => {
-  testInterface(formatColor(document.getElementById('interface').value, document.getElementById('testInterfaceColor').value));
+  testInterface(formatColor(document.getElementById('interface').value.colors, document.getElementById('testInterfaceColor').value));
 });
 
 function save() {
@@ -74,7 +74,8 @@ function getFormatedValues() {
   for (let i in environments) {
     formatedEnvironments.push({
       ...environments[i],
-      colors: formatColor(interfaceValue, environments[i].color)
+      colors: formatColor(interfaceValue.colors, environments[i].color),
+      banner: formatColor(interfaceValue.banner, environments[i].color)
     });
   }
 
@@ -82,7 +83,7 @@ function getFormatedValues() {
 }
 
 function formatColor(input, color) {
-  let colors = {tab_background_ext: '#000'};
+  let colors = {};
   for (let i in input) {
     if (input[i]) {
       colors[i] = color;
@@ -118,6 +119,12 @@ function testInterface(colors) {
   });
 }
 
+function testBanner(colors) {
+  browser.tabs.getCurrent().then(tab => {
+    browser.runtime.sendMessage({action: 'test_banner', windowId: tab.windowId, colors});
+  });
+}
+
 function exportEnvironments() {
   browser.runtime.sendMessage({action: 'export_environments'});
 }
@@ -145,7 +152,7 @@ function init() {
     }
 
     if (data && data.environments && data.environments[0]) {
-      document.getElementById('interface').value = data.environments[0].colors;
+      document.getElementById('interface').value = data.environments[0];
     }
   });
 
