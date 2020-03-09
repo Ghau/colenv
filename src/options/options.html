@@ -1,0 +1,76 @@
+<html>
+<head>
+    <meta charset="utf-8">
+    <script type="application/javascript" src="../../browser-polyfill.js"></script>
+    <link rel="stylesheet" type="text/css" href="chrome://browser/content/extension.css">
+    <link rel="stylesheet" type="text/css" href="common.css">
+    <link rel="stylesheet" type="text/css" href="options.css">
+    <script type="application/javascript" src="transTag/trans.js"></script>
+    <script type="application/javascript" src="popinTag/popin.js"></script>
+    <script type="application/javascript" src="uploadTag/upload.js"></script>
+    <script type="application/javascript" src="importTag/import.js"></script>
+    <script type="application/javascript" src="messageTag/message.js"></script>
+    <script type="application/javascript" src="environmentsTag/environment.js"></script>
+    <script type="application/javascript" src="interfaceTag/interface.js"></script>
+</head>
+
+<body>
+<div class="container">
+    <h1 class="title"><trans-nav>extensionName</trans-nav></h1>
+    <div class="columns">
+        <div class="column">
+            <div class="block">
+                <h2><trans-nav>testUrl</trans-nav></h2>
+                <input type="url" id="test_url" value="http://" />
+            </div>
+        </div>
+    </div>
+    <div class="columns">
+        <div class="column">
+            <div class="block">
+                <h2><trans-nav><i>environmentTitle</i></trans-nav></h2>
+                <environments-container id="environments"></environments-container>
+            </div>
+        </div>
+    </div>
+    <div class="columns">
+        <div class="column import-column">
+            <div class="block">
+                <message-flash style="display: none;">
+                    <div slot="content">test</div>
+                </message-flash>
+                <h2><trans-nav>importExport</trans-nav></h2>
+
+                <!-- TODO import from url -->
+                <import-url id="importUrl" class="displayNone"></import-url>
+                <button id="buttonImport"><trans-nav>buttonImport</trans-nav></button>
+                <popin-info id="popin_info">
+                    <div slot="content">
+                        <upload-form id="import" accept="application/json"></upload-form>
+                        <div class="error" id="upload_error"></div>
+                    </div>
+                </popin-info>
+                <button id="buttonExport"><trans-nav>buttonExport</trans-nav></button>
+            </div>
+        </div>
+        <div class="column interface-column">
+            <div class="block">
+                <h2><trans-nav>interface</trans-nav></h2>
+                <div class="columns">
+                    <div class="column">
+                        <interface-block id="interface"></interface-block>
+                    </div>
+                    <div class="column test-interface">
+                        <button id="testInterface"><trans-nav>buttonTestInterface</trans-nav></button>
+                        <input type="color" id="testInterfaceColor" value="#70FFF8" />
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<script type="application/javascript" src="options.js"></script>
+</body>
+
+</html>
