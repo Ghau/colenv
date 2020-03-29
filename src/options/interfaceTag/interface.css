@@ -1,7 +1,0 @@
-.interface-element {
-    display: flex;
-    width: 200px;
-}
-.interface-element > input, label {
-    flex: 1;
-}
